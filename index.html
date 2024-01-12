@@ -4,16 +4,35 @@
     <title>Your Name - Personal Website</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        .main-title {
+            text-align: center;
+            margin-top: 0;
         }
         .header {
-            background-color: #f8f8f8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 20px;
-            text-align: center;
+            background-color: #f4f4f4;
+        }
+
+        .header img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
         }
         .content {
             flex: 1;
@@ -31,83 +50,203 @@
         .profile-pic {
             float: right;
             border-radius: 50%;
-            width: 150px; /* Adjust as needed */
-            height: 150px; /* Adjust as needed */
+            width: 150px;
+            height: 150px;
             margin: 10px;
         }
-        section {
-            margin-bottom: 20px;
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #008cba;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+        .navbar a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #005f73;
+        }
+        .section {
+            padding: 20px;
+            margin: 15px 0;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        h2 {
+            color: #005f73;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .section a {
+            color: #008cba;
+            text-decoration: none;
+        }
+        .section a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <img src="path_to_your_image.jpg" alt="Your Name" class="profile-pic">
-        <h1>Ye Henry Li</h1>
-        <p>I am an expert statistician (data and machine learning scientist) with
-                in-depth experience helping teams and organizations to make the best use of data.
-                In my work, I dig through the technical complexities of data pipelines and computing systems,
-                cross-organizational communications, and tools readily available on the market,
-                to explain in plain English what is going well and what needs to be improved.
-                If an organization wants to make an improvement to their data assets and product automation,
-                I am here to help with the research and development work. I worked with teams in academic settings,
-                big tech and startups to launch machine learning capabilities.
-                I strive to make precise and valuable incremental changes
-                as well as business direction-defining quantum leaps.</p>
+
+<h1 class="main-title">Henry Li</h1>
+
+<div class="header">
+    <img src="hl_profile_pic.png" class="profile-pic">
+    <div class="header-text">
+        <p>Hello and welcome to my website! I am a statistician and scientist with expertise in contemporary
+            data technology through both academic
+            training
+            and professional experience. My career is defined by the pursuit of innovation and excellence. I have helped
+            various organizations solve challenges in systems complexities using a wide range set of tools familiar to
+            practitioners in data science, algorithmic research, engineering, and product management.</p>
+        <p>I earned a double BA in
+            Biochemistry and Statistics from the University of California, Berkeley. I also completed a PhD in
+            Structural
+            Biology (Biophysics) and a Master’s Degree in Public Policy from Stanford University.
+        </p>
     </div>
+</div>
 
-    <div class="content">
+<div class="navbar">
+    <a href="#education">Education</a>
+    <a href="#professional-history">Professional History</a>
+    <a href="#selected-work">Selected Work</a>
+    <a href="#contact-me">Contact Me</a>
+</div>
 
-        <section>
-            <h2>Selected Work</h2>
-                <h3>Data anomaly detection</h3>
-                <p>Data-driven ML framework for anomaly detection for all data companies</p>
-                <ul>
-                    <li>
-                        <a href="https://bigeye.com/publications/lessons-learned-from-uber">
-                            Lessons Learned from Uber: Designing an Intelligent Data Quality Monitor, Bigeye Publication, 2021.
-                        </a>
-                    </li>
-                </ul>
+<div class="section" id="education">
+    <h2>Education</h2>
+    <p>My academic journey started at the University of California, Berkeley, where I studied Statistics and
+        Biochemistry. I performed undergraduate research on the mechanism of DNA replication in Prof. John Kuriyan’s
+        lab with Dr. Brian Kelch. This period was instrumental in building my foundation in biochemical and
+        biophysical methods for experimental design, project management and data collection; additionally, I honed
+        my skills in applying computational biology methods to organize, process, analyze, and interpret the data to
+        model complex biological systems.</p>
 
-                <h3>Intelligent infrastructure</h3>
-                <p>Data anomaly detection at scale</p>
-                <ul>
-                    <li>
-                        <a href="https://eng.uber.com/monitoring-data-quality-at-scale">
-                            Monitoring Data Quality at Scale with Statistical Modeling. Uber Engineering Blog, 2020.
-                        </a>
-                    </li>
-                </ul>
-                <p>Intelligent code deployment and rollback</p>
-                <p>Cost planning and data asset usage</p>
+    <p>To further my passion for unraveling biological complexities, I pursued the intersection of
+        biology and statistics at Stanford University, where I completed a PhD in Structural Biology (Biophysics). Under
+        the
+        guidance of renowned advisors like Prof. Wing Wong, Prof. Garry Nolan, and Prof. Michael Levitt, I completed
+        my doctoral research on cellular states and biological systems. My work shed new light on dynamical gene
+        networks, contributed to our understanding of the biochemical and genetic factors in bone development and
+        aging, and pioneered new algorithms for high-dimensional single-cell datasets with statistical emphasis on
+        data batch effects and cross-sample mapping of cell populations.</p>
 
-                <h3>Biostatistics research</h3>
-                <p>High-dimensional single-cell studies</p>
+    <p>In my postdoctoral work at the Stanford Blood Center with Prof. Ed Engleman, I developed and applied
+        computational techniques on high-dimensional tissue images to understand the side effects of immunotherapy
+        strategies.
+    </p>
+</div>
 
-                <h3>Opinion pieces on statistical sciences</h3>
-                <ul>
-                    <li>
-                        <a href="https://venturebeat.com/2021/your-article-link">
-                            You need to be constantly exploring the data in your AI pipeline, VentureBeat, 2021.
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://datanomi.com/2021/your-article-link">
-                            Solving One of ML and AI’s Biggest Challenges: Exploratory Data Analysis, Datanomi 2021.
-                        </a>
-                    </li>
-                </ul>
-        </section>
+<div class="section" id="professional-history">
+    <h2>Professional History</h2>
+    <p>As a long-time resident of Silicon Valley, I followed the fast-paced changes in the tech industry very
+        closely. While laboratory-based academic research has given me the opportunity to discover, I have always
+        been fascinated by the ability of tech industry professionals in solving business problems at scale by
+        applying knowledge of statistical and machine learning. On top of that, I wanted to understand how to
+        quickly launch reliable machine learning capabilities to put ‘magic’ into the hands of users. This know-how
+        should offer guidance on any innovative project in the future.</p>
 
-        <section>
-            <h2>Contact Me</h2>
-            <p>You can reach me at hlowl2 @ gmail.com.</p>
-        </section>
+    <p>I decided to join Uber Technologies, at the time a fast-moving, giant startup, to learn high-quality,
+        industry-standard data science and engineering best practices from some of the most experienced
+        professionals in the tech industry. At Uber, I optimized processes behind various business products as part
+        of a small data science team. I developed and built Uber’s first statistical data anomaly detection service
+        to scale the company’s data quality monitoring. In addition, I developed Uber’s data-driven business outage
+        detection and mitigation framework. I also worked with the internal hardware and infrastructure teams to
+        understand the company’s computing needs, hardware purchasing plans, and the transition of data storage from
+        on-premise data centers to the cloud. In all, these infrastructure projects improved the company’s cost
+        efficiency by >$50 million.</p>
+
+    <p>After building Uber’s data quality monitoring service, I wanted to develop the same product for all
+        companies. No software company at the time offered an enterprise tool for data monitoring–most companies
+        relied on building data monitoring in-house, which is very expensive. I joined Bigeye Data as the third
+        employee and first data scientist to achieve the vision of a data observability enterprise software for all.
+        In the last three years, I developed and built machine learning and AI automation in the Bigeye software.
+        Bigeye is used by organizations in many industries, and past and present users come from many companies
+        including Zoom, Instacart, Confluent, and the intelligence community in a partnership with In-Q-Tel.</p>
+
+    <p>I will continue to use my deep expertise in statistics and the sciences to contribute to groundbreaking
+        advancements. I am committed to making a significant impact in information technology, the biosciences, and
+        policy through data-driven innovations.</p>
+</div>
+
+<div class="section" id="selected-work">
+    <h2>Selected Work</h2>
+    <h3>🔍 Data anomaly detection</h3>
+    <p>Data-driven ML framework for anomaly detection for all data companies</p>
+    <ul>
+        <li>
+            <a href="https://www.bigeye.com/blog/lessons-learned-from-uber-designing-an-intelligent-data-quality-monitor">
+                Lessons Learned from Uber: Designing an Intelligent Data Quality Monitor, Bigeye Publication, 2021.
+            </a>
+        </li>
+    </ul>
+
+    <h3>📈 Intelligent infrastructure</h3>
+    <p>Data anomaly detection at scale</p>
+    <ul>
+        <li>
+            <a href="https://eng.uber.com/monitoring-data-quality-at-scale">
+                Monitoring Data Quality at Scale with Statistical Modeling. Uber Engineering Blog, 2020.
+            </a>
+        </li>
+    </ul>
+    <p>Intelligent code deployment and rollback</p>
+    <p>Cost planning and data asset usage</p>
+
+    <h3>🧬 Biosciences and statistical research</h3>
+    <p>High-dimensional single-cell studies</p>
+
+    <h3>🤓 Opinion pieces on data science</h3>
+    <ul>
+        <li>
+            <a href="https://venturebeat.com/ai/you-need-to-be-constantly-exploring-the-data-in-your-ai-pipeline/">
+                You need to be constantly exploring the data in your AI pipeline, VentureBeat, 2021.
+            </a>
+        </li>
+        <li>
+            <a href="https://www.datanami.com/2021/08/17/solving-one-ml-and-ais-biggest-challenges-exploratory-data-analysis/">
+                Solving One of ML and AI’s Biggest Challenges: Exploratory Data Analysis, Datanomi, 2021.
+            </a>
+        </li>
+        <li>
+            <a href="https://www.bigeye.com/blog/making-sense-of-machine-learning-and-artificial-intelligence-models-by-monitoring-the-training-data">
+                Making sense of machine learning and artificial intelligence models by monitoring the training data,
+                Bigeye Blog, 2023.
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="section" id="contact-me">
+    <h2>Contact Me</h2>
+    <div class="contact-icons">
+        <a href="mailto:hlowl2@gmail.com">
+            <img class="contact-icon"
+                 src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/email.svg"
+                 alt="Email icon" width="35">
+        </a>
+        <a href="https://www.linkedin.com/in/yehenryli/" target="_blank">
+            <img class="contact-icon"
+                 src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/linkedin.svg"
+                 alt="LinkedIn icon" width="35">
+        </a>
+        <a href="https://scholar.google.com/citations?hl=en&user=oEDTLW0AAAAJ" target="_blank">
+            <img class="contact-icon"
+                 src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/google_scholar.svg"
+                 alt="Google scholar icon" width="35">
+        </a>
     </div>
+</div>
 
-    <div class="footer">
-        <p>© 2024 by Henry Li.</p>
-    </div>
+<div class="footer">
+    <p>© 2024 by Henry Li.</p>
+</div>
 </body>
 </html>
