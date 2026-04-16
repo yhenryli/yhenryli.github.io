@@ -2,189 +2,276 @@
 <html>
 <head>
     <title>Henry Li - Personal Website</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        :root {
+            --accent: #005f73;
+            --accent-light: #008cba;
+            --bg: #f4f4f4;
+            --card: #ffffff;
+            --text: #2a2a2a;
+            --muted: #5b6b74;
+            --rule: #e5e8ea;
+        }
+        * { box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         .main-title {
             text-align: center;
-            margin-top: 0;
+            margin: 30px 0 10px;
+            font-size: 42px;
+            letter-spacing: 0.5px;
+            color: var(--accent);
+        }
+        .tagline {
+            text-align: center;
+            color: var(--muted);
+            font-size: 17px;
+            margin: 0 0 25px;
+            font-style: italic;
         }
         .header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 20px;
-            background-color: #f4f4f4;
+            gap: 30px;
+            padding: 20px 0 30px;
+            flex-wrap: wrap;
         }
-
         .header img {
-            width: 250px;
-            height: 250px;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
             object-fit: cover;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
         }
-
         .header-text {
-            display: flex;
-            flex-direction: column;
+            max-width: 520px;
         }
-        .content {
-            flex: 1;
-            padding: 20px;
-        }
-        .text-container
-        {
-            max-width: 600px;
-        }
-        .footer {
-            background-color: #f8f8f8;
-            text-align: center;
-            padding: 10px;
-        }
-        .profile-pic {
-            float: right;
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            margin: 10px;
+        .header-text p {
+            margin: 0;
+            font-size: 17px;
+            color: var(--text);
         }
         .navbar {
             display: flex;
             justify-content: space-around;
             align-items: center;
-            background-color: #008cba;
+            background-color: var(--accent-light);
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            border-radius: 6px;
+            flex-wrap: wrap;
         }
         .navbar a {
             color: white;
-            padding: 14px 20px;
+            padding: 14px 18px;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 16px;
             transition: background-color 0.3s;
         }
         .navbar a:hover {
-            background-color: #005f73;
+            background-color: var(--accent);
         }
         .section {
-            padding: 20px;
-            margin: 15px 0;
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            padding: 30px 35px;
+            margin: 22px 0;
+            background: var(--card);
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        .section p {
+            margin: 0 0 16px;
+        }
+        .section p:last-child {
+            margin-bottom: 0;
         }
         h2 {
-            color: #005f73;
-            font-size: 24px;
-            margin-bottom: 10px;
+            color: var(--accent);
+            font-size: 26px;
+            margin: 0 0 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--rule);
+        }
+        h3 {
+            color: var(--accent);
+            font-size: 19px;
+            margin: 24px 0 10px;
         }
         .section a {
-            color: #008cba;
+            color: var(--accent-light);
             text-decoration: none;
         }
         .section a:hover {
             text-decoration: underline;
         }
+        .lead {
+            font-size: 19px;
+            color: var(--text);
+        }
+        .footer {
+            background-color: #f8f8f8;
+            text-align: center;
+            padding: 14px;
+            margin-top: 20px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+        .contact-icons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        .contact-icons img {
+            transition: transform 0.2s;
+        }
+        .contact-icons a:hover img {
+            transform: scale(1.1);
+        }
+        @media (max-width: 640px) {
+            .header img { width: 170px; height: 170px; }
+            .main-title { font-size: 34px; }
+            .section { padding: 22px; }
+        }
     </style>
 </head>
 <body>
 
+<div class="page">
+
 <h1 class="main-title">Henry Li</h1>
+<p class="tagline">Statistician · Data Scientist · AI Engineer</p>
 
 <div class="header">
-    <img src="hl_profile_pic.png" class="profile-pic">
+    <img src="hl_profile_pic.png" alt="Henry Li">
     <div class="header-text">
-        <p>Hello and welcome to my website! 🎉 🙌 😃</p>
-        <p>I am a statistician, data scientist, and AI engineer. I have deep expertise in
-            solving data problems that arise from complex systems, spanning biological networks to commercial and
-            enterprise data pipelines, using a wide range of tools in data science, machine learning, AI,
-            algorithmic research, engineering, and tech lead/product management. Most recently, I co-founded
-            TryNova AI, building an autonomous generative AI platform for enterprise software quality assurance.
-            My work is defined by the pursuit of innovation and excellence.</p>
-        <p>I completed my PhD in Structural Biology (Biophysics) at Stanford University along with Master’s Degree in
-            Public Policy. My BA was in Biochemistry and Statistics at the University of California, Berkeley.
-        </p>
-        <p>Let's explore the possibilities together!
-        </p>
+        <p>Hello, and welcome. I build the data foundations, scalable infrastructure,
+            and safety systems that allow enterprises to genuinely trust their data and AI &mdash;
+            translating rigorous statistical theory and large-scale engineering into practical
+            business outcomes.</p>
     </div>
 </div>
 
 <div class="navbar">
-    <a href="#education">Education</a>
-    <a href="#professional-history">Professional History</a>
+    <a href="#about">About</a>
+    <a href="#industry">Industry</a>
+    <a href="#academic">Academic</a>
     <a href="#selected-work">Selected Work</a>
-    <a href="#contact-me">Contact Me</a>
+    <a href="#contact-me">Contact</a>
 </div>
 
-<div class="section" id="education">
-    <h2>Education</h2>
-    <p>My academic journey started at the University of California, Berkeley, where I studied Statistics and
-        Biochemistry. I performed undergraduate research on the mechanism of DNA replication in Prof. John Kuriyan’s
-        lab with Dr. Brian Kelch. I mastered the foundation of biochemical and
-        biophysical methods for experimental design, project management and data collection; additionally, I applied
-        computational biology methods to organize, process, analyze, and interpret the data to
-        model complex biological systems.</p>
-
-    <p>To further my passion for unraveling biological complexities, I pursued the intersection of
-        biology and statistics at Stanford University, where I completed a PhD in Structural Biology (Biophysics). Under
-        the
-        guidance of renowned advisors like Prof. Wing Wong, Prof. Garry Nolan, and Prof. Michael Levitt, I completed
-        my doctoral research on cellular states and biological systems. My work shed new light on dynamical gene
-        networks, contributed to our understanding of the biochemical and genetic factors in bone development and
-        aging, and pioneered new algorithms for high-dimensional single-cell datasets with statistical emphasis on
-        data batch effects and cross-sample mapping of cell populations.</p>
-
-    <p>In my postdoctoral work at the Stanford Blood Center with Prof. Ed Engleman, I developed and applied
-        computational techniques on high-dimensional tissue images to understand the side effects of immunotherapy
-        strategies.
-    </p>
+<div class="section" id="about">
+    <h2>About Me</h2>
+    <p class="lead">Hello, and welcome. I'm Henry Li.</p>
+    <p>My career is dedicated to building the data foundations, scalable infrastructure, and
+        safety systems that allow enterprises to genuinely trust their data and AI.</p>
+    <p>Solving today's enterprise AI bottlenecks takes a rare blend of rigorous statistical theory
+        and large-scale engineering. Over the years, my work has spanned modeling unpredictable
+        biological systems, architecting enterprise data quality monitors, and building autonomous
+        AI agents. Today, I focus on translating the mathematical and technical underpinnings of
+        these systems into practical, reliable, and secure business solutions &mdash; though I'd
+        be the first to say that "trust" in a data or AI system is a moving target, and much of
+        what makes that work interesting is that the goalposts keep shifting as the systems
+        themselves evolve.</p>
 </div>
 
-<div class="section" id="professional-history">
-    <h2>Professional History</h2>
+<div class="section" id="industry">
+    <h2>Industry Experience &amp; Scaling AI</h2>
+    <p>My approach to complex data problems was shaped by working inside large-scale tech operations.</p>
 
-    <p>To expand my knowledge as a statistician, I decided to move into the tech industry to learn how to
-        solve business problems at scale by launching reliable machine learning capabilities. I joined Uber
-        Technologies, a fast-moving leading startup at the time, to learn high-quality,
-        industry-standard data science and engineering best practices from some of the most experienced
-        professionals in the industry.</p>
+    <h3>Uber &mdash; Data Science</h3>
+    <p>I joined Uber as a Data Scientist during a period of rapid expansion for its machine
+        learning systems, where the fidelity of data feeding those models had become a critical
+        bottleneck. To address it, I architected and deployed Uber's first internal statistical
+        data quality monitoring system for ML pipelines &mdash; an early blueprint for what would
+        become the modern data monitoring industry, which I later wrote about in
+        <a href="https://eng.uber.com/monitoring-data-quality-at-scale">Uber Engineering</a>.</p>
+    <p>What struck me then, and still feels unresolved, is how much of "data quality" resists
+        formal definition: a dataset can pass every statistical check and still be subtly wrong
+        in ways only a domain expert would catch. That gap between measurable quality and
+        meaningful quality is, I think, one of the more interesting open questions in the field.</p>
 
-    <p>At Uber, I optimized processes behind various business products as part
-        of a small and agile data science team. I developed and built Uber’s first statistical data anomaly detection
-        service to scale the company’s data quality monitoring. In addition, I developed Uber’s data-driven business
-        outage detection and mitigation framework. I also worked with the internal hardware and infrastructure teams to
-        model the company’s computing needs, validate hardware purchasing plans with scenario forecasting,
-        and support the transition of data storage from on-premise data centers to the cloud.
-        In all, these infrastructure projects improved the company’s cost efficiency by >$50 million.</p>
+    <h3>Bigeye &mdash; Founding Data Scientist</h3>
+    <p>Recognizing that every modern enterprise needed this level of observability, I joined
+        Bigeye as its Founding Data Scientist. From 2020 through 2023, I translated hyperscale
+        internal monitoring tools into a flexible, enterprise-grade platform. By architecting the
+        machine learning and automation engines at the core of the product, we abstracted away
+        the complexity of data observability so clients could automatically detect and remediate
+        anomalies. We deployed these capabilities to enterprise leaders like Zoom, Confluent, and
+        Instacart, as well as to highly regulated organizations within the Intelligence
+        Community &mdash; an experience that deeply informed my understanding of how enterprise
+        buyers evaluate and procure critical infrastructure.</p>
+    <p>One lesson I carried away: the hardest part of observability is rarely the detection;
+        it's deciding which anomalies warrant human attention in a world where data is always
+        drifting a little. That prioritization problem only grows when AI systems start reacting
+        to the data in real time.</p>
 
-    <p>After building Uber’s data quality monitoring service, I wanted to develop the same product for all
-        companies. No software company at the time offered an enterprise tool for data monitoring–most companies
-        relied on building data monitoring in-house, which is very expensive. I joined Bigeye Data as the third
-        employee and first data scientist to achieve the vision of a data observability enterprise software for all.
-        I developed and built machine learning and AI automation in the Bigeye software.
-        Bigeye is used by organizations in many industries, and past and present users come from many companies
-        including Zoom, Instacart, Confluent, and the intelligence community in a partnership with In-Q-Tel.</p>
+    <h3>Nova AI &mdash; Co-Founder</h3>
+    <p>After Bigeye, I co-founded Nova AI, an agentic software testing company. Working with
+        clients such as JB Hi-Fi, we transformed manual QA workflows into environments assisted
+        by AI agents, substantially reducing test-writing time and freeing engineering teams to
+        focus on the user paths that actually mattered. Building agents that act on real
+        codebases made the reliability question concrete in a new way &mdash; it's one thing to
+        generate a plausible test, another to trust an agent to know when it shouldn't act. I
+        suspect the industry is still early in working out how to give these systems a
+        well-calibrated sense of their own uncertainty.</p>
+</div>
 
-    <p>After building data and ML products at Uber and Bigeye, I saw a parallel opportunity in software quality
-        assurance: enterprise QA teams were still writing and maintaining end-to-end tests largely by hand, and
-        the emergence of large language models made reliable automation finally within reach. I co-founded TryNova AI
-        to build an autonomous generative AI platform for enterprise QA. I led the technical strategy and architected
-        the core QA agent harness and its underlying reasoning logic, bridging the probabilistic nature of LLMs with
-        deterministic execution environments so the system could transform raw user session data into self-healing,
-        maintainable test code across complex web and mobile applications. We brought the platform to market and sold
-        to major enterprises including JB Hi-Fi, Australia’s largest consumer electronics retailer, where I worked
-        directly with their engineering and QA leadership to deploy our infrastructure and accelerate their release
-        cycles.</p>
+<div class="section" id="academic">
+    <h2>Academic Foundations &amp; Mentorship</h2>
+    <p>My approach to drawing precise, replicable insights from highly interdependent systems is
+        rooted in my academic training. I hold a PhD in Structural Biology (Biophysics) and a
+        Master of Public Policy from Stanford, along with a BA in Statistics and Biochemistry
+        from UC Berkeley.</p>
+    <p>Throughout my academic journey, I had the privilege of learning from and collaborating
+        with some of the most accomplished scientists and economists of their generation. I
+        mention their names here not to claim credit for their life-long work, but to express my
+        gratitude &mdash; observing their intellect up close and learning from their
+        uncompromising standard of rigor continues to shape how I approach problems today.</p>
 
-    <p>I will continue to use my deep expertise in statistics, AI, and the sciences to contribute to groundbreaking
-        advancements. I am committed to making a significant impact in information technology, the biosciences, and
-        policy through data-driven and AI-powered innovations.</p>
+    <h3>UC Berkeley &mdash; Biophysics of DNA Replication</h3>
+    <p>At UC Berkeley, I studied the biophysical mechanisms of DNA replication under Professor
+        John Kuriyan and Dr. Brian Kelch. Running X-ray diffraction experiments at Lawrence
+        Berkeley National Laboratory taught me how to navigate and extract insights from
+        intricate biological systems &mdash; and, perhaps more importantly, how much of
+        scientific progress depends on being comfortable with partial answers while the fuller
+        picture takes shape.</p>
+
+    <h3>Stanford &mdash; Statistics &amp; Computational Biology</h3>
+    <p>At Stanford, I was drawn to the intersection of statistics and computational biology, and
+        was advised by an extraordinary group of scientists: Professor Wing Hung Wong (recipient
+        of the COPSS Presidents' Award in Statistics), Professor Michael Levitt (Nobel Laureate
+        in Chemistry), Professor Chiara Sabatti, and Professor Garry Nolan. Under their guidance,
+        I developed projects modeling cellular states through high-dimensional gene networks,
+        with peer-reviewed publications in <em>PLOS Computational Biology</em> and the
+        <em>Annals of Applied Statistics</em>.</p>
+    <p>High-dimensional biology is a humbling area to work in: the models are always reductions
+        of something far more tangled, and the question of what we're justified in concluding
+        from them is one I still think about in my current work on AI systems.</p>
+
+    <h3>Stanford &mdash; Public Policy &amp; Biosecurity</h3>
+    <p>A parallel interest in how policy is used to manage complex societal systems led me to
+        Stanford's Master of Public Policy program, where I worked with Professor Joe Nation and
+        Professor Bill Sharpe (Nobel Laureate in Economics). Together we applied rigorous
+        statistical simulations to model the multi-decade behavior of public pension systems,
+        evaluating policy shifts to optimize long-term solvency.</p>
+    <p>This dual-track education also introduced me to biosecurity. I collaborated with Dr.
+        Milana Trounce, Director of Biosecurity at Stanford, to co-author a publication on the
+        academic discourse of the field. Analyzing how institutions evaluate and mitigate
+        catastrophic biological risks fundamentally shaped my view of systemic threat models and
+        risk governance.</p>
 </div>
 
 <div class="section" id="selected-work">
@@ -301,6 +388,7 @@
         </li>
     </ul>
 </div>
+
 <div class="section" id="contact-me">
     <h2>Contact Me</h2>
     <div class="contact-icons">
@@ -320,6 +408,8 @@
                  alt="Google scholar icon" width="35">
         </a>
     </div>
+</div>
+
 </div>
 
 <div class="footer">
