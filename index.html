@@ -135,6 +135,53 @@
             transform: translateY(-1px) scale(1.03);
         }
 
+        /* ---------- Language switcher (floating glass pill, top-right) ---------- */
+        .lang-switch {
+            position: fixed;
+            top: 18px;
+            right: 22px;
+            z-index: 40;
+            display: flex;
+            gap: 2px;
+            padding: 5px;
+            background: var(--glass-strong);
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            border: 1px solid var(--glass-border);
+            border-radius: 999px;
+            box-shadow:
+                0 10px 24px rgba(30, 43, 34, 0.10),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+        .lang-switch button {
+            appearance: none;
+            -webkit-appearance: none;
+            background: transparent;
+            border: 0;
+            color: var(--ink-dim);
+            font-family: 'Manrope', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.04em;
+            padding: 6px 11px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: color 0.35s var(--soft), background 0.35s var(--soft), box-shadow 0.35s var(--soft), transform 0.35s var(--spring);
+        }
+        .lang-switch button:hover {
+            color: var(--ink);
+            transform: translateY(-1px);
+        }
+        .lang-switch button.active {
+            color: var(--ink);
+            background: linear-gradient(135deg, rgba(24, 164, 99, 0.22), rgba(124, 58, 237, 0.22));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 4px 12px rgba(24, 164, 99, 0.14);
+        }
+        .lang-switch button:focus-visible {
+            outline: 2px solid var(--lilac);
+            outline-offset: 2px;
+        }
+
         /* ---------- Hero ---------- */
         .hero {
             display: grid;
@@ -441,10 +488,13 @@
             .shell { padding: 24px 18px 40px; }
             .navbar { top: 10px; margin-bottom: 28px; padding: 6px; }
             .navbar a { padding: 8px 14px; font-size: 13px; }
+            .lang-switch { top: 8px; right: 8px; padding: 3px; gap: 1px; }
+            .lang-switch button { padding: 5px 9px; font-size: 11px; letter-spacing: 0.02em; }
             .hero {
                 grid-template-columns: 1fr;
                 gap: 28px;
                 text-align: center;
+                padding-top: 44px; /* extra space below the fixed lang switcher */
             }
             .hero-copy .lede { margin-left: auto; margin-right: auto; }
             .hero-copy .kicker { letter-spacing: 0.18em; }
@@ -465,14 +515,21 @@
 
 <div class="vignette"></div>
 
+<div class="lang-switch" role="group" aria-label="Language">
+    <button type="button" data-lang="en" aria-label="English">EN</button>
+    <button type="button" data-lang="fr" aria-label="Français">FR</button>
+    <button type="button" data-lang="zh" aria-label="简体中文">中文</button>
+    <button type="button" data-lang="fi" aria-label="Suomi">SUOMI</button>
+</div>
+
 <div class="shell">
 
     <nav class="navbar">
-        <a href="#about">About</a>
-        <a href="#industry">Industry</a>
-        <a href="#academic">Academic</a>
-        <a href="#selected-work">Selected Work</a>
-        <a href="#contact-me">Contact</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#industry" data-i18n="nav.industry">Industry</a>
+        <a href="#academic" data-i18n="nav.academic">Academic</a>
+        <a href="#selected-work" data-i18n="nav.selectedWork">Selected Work</a>
+        <a href="#contact-me" data-i18n="nav.contact">Contact</a>
     </nav>
 
     <header class="hero reveal">
@@ -480,9 +537,9 @@
             <img src="hl_profile_pic.png" alt="Henry Li">
         </div>
         <div class="hero-copy">
-            <span class="kicker">Statistician · Data Scientist · AI Engineer</span>
+            <span class="kicker" data-i18n="hero.kicker">Statistician · Data Scientist · AI Engineer</span>
             <h1>Henry Li</h1>
-            <p class="lede">Building the data foundations, scalable infrastructure, and safety systems
+            <p class="lede" data-i18n="hero.lede">Building the data foundations, scalable infrastructure, and safety systems
                 that allow enterprises to genuinely trust their data and AI &mdash; translating
                 rigorous statistical theory and large-scale engineering into practical business outcomes.</p>
         </div>
@@ -491,11 +548,11 @@
     <main class="bento">
 
         <section class="card span-12 reveal" id="about">
-            <h2>About Me</h2>
-            <p class="lead">Hello, and welcome. I'm Henry Li.</p>
-            <p>My career is dedicated to building the data foundations, scalable infrastructure, and
+            <h2 data-i18n="about.h2">About Me</h2>
+            <p class="lead" data-i18n="about.lead">Hello, and welcome. I'm Henry Li.</p>
+            <p data-i18n="about.p1">My career is dedicated to building the data foundations, scalable infrastructure, and
                 safety systems that allow enterprises to genuinely trust their data and AI.</p>
-            <p>Solving today's enterprise AI bottlenecks takes a rare blend of rigorous statistical theory
+            <p data-i18n="about.p2">Solving today's enterprise AI bottlenecks takes a rare blend of rigorous statistical theory
                 and large-scale engineering. Over the years, my work has spanned modeling unpredictable
                 biological systems, architecting enterprise data quality monitors, and building autonomous
                 AI agents. Today, I focus on translating the mathematical and technical underpinnings of
@@ -506,24 +563,24 @@
         </section>
 
         <section class="card span-12 reveal" id="industry">
-            <h2>Industry Experience &amp; Scaling AI</h2>
-            <p>My approach to complex data problems was shaped by working inside large-scale tech operations.</p>
+            <h2 data-i18n="industry.h2">Industry Experience &amp; Scaling AI</h2>
+            <p data-i18n="industry.intro">My approach to complex data problems was shaped by working inside large-scale tech operations.</p>
 
-            <h3>Uber &mdash; Data Science</h3>
-            <p>I joined Uber as a Data Scientist during a period of rapid expansion for its machine
+            <h3 data-i18n="industry.uber.h3">Uber &mdash; Data Science</h3>
+            <p data-i18n="industry.uber.p1">I joined Uber as a Data Scientist during a period of rapid expansion for its machine
                 learning systems, where the fidelity of data feeding those models had become a critical
                 bottleneck. I led the effort to build Uber's first internal data quality monitoring
                 system for ML pipelines &mdash; an early blueprint for what would become the modern
                 data monitoring industry &mdash; and was the lead author on the
                 <a href="https://web.archive.org/web/20220113062202/https:/eng.uber.com/monitoring-data-quality-at-scale/">Uber Engineering post</a>
                 that introduced the work publicly.</p>
-            <p>What struck me then, and still feels unresolved, is how much of "data quality" resists
+            <p data-i18n="industry.uber.p2">What struck me then, and still feels unresolved, is how much of "data quality" resists
                 formal definition: a dataset can pass every statistical check and still be subtly wrong
                 in ways only a domain expert would catch. That gap between measurable quality and
                 meaningful quality is, I think, one of the more interesting open questions in the field.</p>
 
-            <h3>Bigeye &mdash; Founding Data Scientist</h3>
-            <p>Recognizing that every modern enterprise needed this level of observability, I joined
+            <h3 data-i18n="industry.bigeye.h3">Bigeye &mdash; Founding Data Scientist</h3>
+            <p data-i18n="industry.bigeye.p1">Recognizing that every modern enterprise needed this level of observability, I joined
                 Bigeye as its Founding Data Scientist. From 2020 through 2023, I translated hyperscale
                 internal monitoring tools into a flexible, enterprise-grade platform. By architecting the
                 machine learning and automation engines at the core of the product, we abstracted away
@@ -532,13 +589,13 @@
                 Instacart, as well as to highly regulated organizations within the Intelligence
                 Community &mdash; an experience that deeply informed my understanding of how enterprise
                 buyers evaluate and procure critical infrastructure.</p>
-            <p>One lesson I carried away: the hardest part of observability is rarely the detection;
+            <p data-i18n="industry.bigeye.p2">One lesson I carried away: the hardest part of observability is rarely the detection;
                 it's deciding which anomalies warrant human attention in a world where data is always
                 drifting a little. That prioritization problem only grows when AI systems start reacting
                 to the data in real time.</p>
 
-            <h3>Nova AI &mdash; Co-Founder</h3>
-            <p>After Bigeye, I co-founded Nova AI, an agentic software testing company. Working with
+            <h3 data-i18n="industry.nova.h3">Nova AI &mdash; Co-Founder</h3>
+            <p data-i18n="industry.nova.p1">After Bigeye, I co-founded Nova AI, an agentic software testing company. Working with
                 clients such as JB Hi-Fi, we transformed manual QA workflows into environments assisted
                 by AI agents, substantially reducing test-writing time and freeing engineering teams to
                 focus on the user paths that actually mattered. Building agents that act on real
@@ -549,44 +606,44 @@
         </section>
 
         <section class="card span-12 reveal" id="academic">
-            <h2>Academic Foundations &amp; Mentorship</h2>
-            <p>My approach to drawing precise, replicable insights from highly interdependent systems is
+            <h2 data-i18n="academic.h2">Academic Foundations &amp; Mentorship</h2>
+            <p data-i18n="academic.intro">My approach to drawing precise, replicable insights from highly interdependent systems is
                 rooted in my academic training. I hold a PhD in Structural Biology (Biophysics) and a
                 Master of Public Policy from Stanford, along with a BA in Statistics and Biochemistry
                 from UC Berkeley.</p>
-            <p>Throughout my academic journey, I had the privilege of learning from and collaborating
+            <p data-i18n="academic.gratitude">Throughout my academic journey, I had the privilege of learning from and collaborating
                 with some of the most accomplished scientists and economists of their generation. I
                 mention their names here not to claim credit for their life-long work, but to express my
                 gratitude &mdash; observing their intellect up close and learning from their
                 uncompromising standard of rigor continues to shape how I approach problems today.</p>
 
-            <h3>UC Berkeley &mdash; Biophysics of DNA Replication</h3>
-            <p>At UC Berkeley, I studied the biophysical mechanisms of DNA replication under Professor
+            <h3 data-i18n="academic.ucb.h3">UC Berkeley &mdash; Biophysics of DNA Replication</h3>
+            <p data-i18n="academic.ucb.p1">At UC Berkeley, I studied the biophysical mechanisms of DNA replication under Professor
                 John Kuriyan and Dr. Brian Kelch. Running X-ray diffraction experiments at Lawrence
                 Berkeley National Laboratory taught me how to navigate and extract insights from
                 intricate biological systems &mdash; and, perhaps more importantly, how much of
                 scientific progress depends on being comfortable with partial answers while the fuller
                 picture takes shape.</p>
 
-            <h3>Stanford &mdash; Statistics &amp; Computational Biology</h3>
-            <p>At Stanford, I was drawn to the intersection of statistics and computational biology, and
+            <h3 data-i18n="academic.stanford1.h3">Stanford &mdash; Statistics &amp; Computational Biology</h3>
+            <p data-i18n="academic.stanford1.p1">At Stanford, I was drawn to the intersection of statistics and computational biology, and
                 was advised by an extraordinary group of scientists: Professor Wing Hung Wong (recipient
                 of the COPSS Presidents' Award in Statistics), Professor Michael Levitt (Nobel Laureate
                 in Chemistry), Professor Chiara Sabatti, and Professor Garry Nolan. Under their guidance,
                 I developed projects modeling cellular states through high-dimensional gene networks,
                 with peer-reviewed publications in <em>PLOS Computational Biology</em> and the
                 <em>Annals of Applied Statistics</em>.</p>
-            <p>High-dimensional biology is a humbling area to work in: the models are always reductions
+            <p data-i18n="academic.stanford1.p2">High-dimensional biology is a humbling area to work in: the models are always reductions
                 of something far more tangled, and the question of what we're justified in concluding
                 from them is one I still think about in my current work on AI systems.</p>
 
-            <h3>Stanford &mdash; Public Policy &amp; Biosecurity</h3>
-            <p>A parallel interest in how policy is used to manage complex societal systems led me to
+            <h3 data-i18n="academic.stanford2.h3">Stanford &mdash; Public Policy &amp; Biosecurity</h3>
+            <p data-i18n="academic.stanford2.p1">A parallel interest in how policy is used to manage complex societal systems led me to
                 Stanford's Master of Public Policy program, where I worked with Professor Joe Nation and
                 Professor Bill Sharpe (Nobel Laureate in Economics). Together we applied rigorous
                 statistical simulations to model the multi-decade behavior of public pension systems,
                 evaluating policy shifts to optimize long-term solvency.</p>
-            <p>This dual-track education also introduced me to biosecurity. I collaborated with Dr.
+            <p data-i18n="academic.stanford2.p2">This dual-track education also introduced me to biosecurity. I collaborated with Dr.
                 Milana Trounce, Director of Biosecurity at Stanford, to co-author a publication on the
                 academic discourse of the field. Analyzing how institutions evaluate and mitigate
                 catastrophic biological risks fundamentally shaped my view of systemic threat models and
@@ -594,10 +651,10 @@
         </section>
 
         <section class="card span-12 reveal" id="selected-work">
-            <h2>Selected Work</h2>
+            <h2 data-i18n="work.h2">Selected Work</h2>
 
             <div class="work-group">
-                <p class="group-title">🔍 Data anomaly detection</p>
+                <p class="group-title" data-i18n="work.g1.title">🔍 Data anomaly detection</p>
                 <ul>
                     <li><a href="https://www.bigeye.com/blog/lessons-learned-from-uber-designing-an-intelligent-data-quality-monitor">Lessons Learned from Uber: Designing an Intelligent Data Quality Monitor</a> — Bigeye Publication, 2021.</li>
                     <li><a href="https://www.bigeye.com/blog/anomaly-detection-part-1-the-key-to-effective-data-observability">Anomaly Detection Part 1: The Key to Effective Data Observability</a> — Bigeye Publication, 2021.</li>
@@ -607,20 +664,20 @@
             </div>
 
             <div class="work-group">
-                <p class="group-title">📈 Intelligent infrastructure</p>
-                <p class="sub-group-title">Data anomaly detection at scale</p>
+                <p class="group-title" data-i18n="work.g2.title">📈 Intelligent infrastructure</p>
+                <p class="sub-group-title" data-i18n="work.g2.sub1">Data anomaly detection at scale</p>
                 <ul>
                     <li><a href="https://web.archive.org/web/20220113062202/https:/eng.uber.com/monitoring-data-quality-at-scale/">Monitoring Data Quality at Scale with Statistical Modeling</a> — Uber Engineering Blog, 2020.</li>
                 </ul>
-                <p class="sub-group-title">Other Uber internal contributions</p>
+                <p class="sub-group-title" data-i18n="work.g2.sub2">Other Uber internal contributions</p>
                 <ul class="nested">
-                    <li class="note">Intelligent code deployment and rollback</li>
-                    <li class="note">Cost planning and data asset usage</li>
+                    <li class="note" data-i18n="work.g2.note1">Intelligent code deployment and rollback</li>
+                    <li class="note" data-i18n="work.g2.note2">Cost planning and data asset usage</li>
                 </ul>
             </div>
 
             <div class="work-group">
-                <p class="group-title">🧬 Biosciences and statistical research</p>
+                <p class="group-title" data-i18n="work.g3.title">🧬 Biosciences and statistical research</p>
                 <ul>
                     <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5760091/">Partition-Assisted Clustering and Multiple Alignments of Networks (PAC-MAN): Accurate and Scalable High-Dimensional Multi-Sample Single-Cell Data Analysis</a> — PLOS Computational Biology, 2017.</li>
                     <li><a href="https://projecteuclid.org/journals/annals-of-applied-statistics/volume-7/issue-3/Learning-a-nonlinear-dynamical-system-model-of-gene-regulation/10.1214/13-AOAS645.full">Learning a Nonlinear Dynamical System Model of Gene Regulation: A Perturbed Steady-State Approach</a> — Annals of Applied Statistics, 2013.</li>
@@ -632,7 +689,7 @@
             </div>
 
             <div class="work-group">
-                <p class="group-title">🤓 Opinion pieces on data science</p>
+                <p class="group-title" data-i18n="work.g4.title">🤓 Opinion pieces on data science</p>
                 <ul>
                     <li><a href="https://venturebeat.com/ai/you-need-to-be-constantly-exploring-the-data-in-your-ai-pipeline/">You Need to Be Constantly Exploring the Data in Your AI Pipeline</a> — VentureBeat, 2021.</li>
                     <li><a href="https://www.datanami.com/2021/08/17/solving-one-ml-and-ais-biggest-challenges-exploratory-data-analysis/">Solving One of ML and AI's Biggest Challenges: Exploratory Data Analysis</a> — Datanami, 2021.</li>
@@ -643,8 +700,8 @@
         </section>
 
         <section class="card span-12 reveal" id="contact-me">
-            <h2>Contact Me</h2>
-            <p>Find me here:</p>
+            <h2 data-i18n="contact.h2">Contact Me</h2>
+            <p data-i18n="contact.intro">Find me here:</p>
             <div class="contact-row">
                 <a href="mailto:hlowl2@gmail.com" aria-label="Email">
                     <img src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/email.svg" alt="">
@@ -699,6 +756,327 @@
 
     // Refresh cached rects on resize
     window.addEventListener('resize', () => { /* handled lazily per hover */ }, { passive: true });
+
+    // ============================================================
+    // i18n — EN / FR / ZH / FI
+    // Strings are resolved via `data-i18n="dot.key"` attributes.
+    // Values may contain inline HTML (<a>, <em>) and are applied
+    // via innerHTML; all strings are author-controlled.
+    // ============================================================
+    const UBER_POST_HREF = 'https://web.archive.org/web/20220113062202/https:/eng.uber.com/monitoring-data-quality-at-scale/';
+
+    const I18N = {
+        en: {
+            meta: { title: 'Henry Li' },
+            nav: { about: 'About', industry: 'Industry', academic: 'Academic', selectedWork: 'Selected Work', contact: 'Contact' },
+            hero: {
+                kicker: 'Statistician · Data Scientist · AI Engineer',
+                lede: 'Building the data foundations, scalable infrastructure, and safety systems that allow enterprises to genuinely trust their data and AI &mdash; translating rigorous statistical theory and large-scale engineering into practical business outcomes.'
+            },
+            about: {
+                h2: 'About Me',
+                lead: "Hello, and welcome. I'm Henry Li.",
+                p1: 'My career is dedicated to building the data foundations, scalable infrastructure, and safety systems that allow enterprises to genuinely trust their data and AI.',
+                p2: 'Solving today\u2019s enterprise AI bottlenecks takes a rare blend of rigorous statistical theory and large-scale engineering. Over the years, my work has spanned modeling unpredictable biological systems, architecting enterprise data quality monitors, and building autonomous AI agents. Today, I focus on translating the mathematical and technical underpinnings of these systems into practical, reliable, and secure business solutions &mdash; though I\u2019d be the first to say that \u201Ctrust\u201D in a data or AI system is a moving target, and much of what makes that work interesting is that the goalposts keep shifting as the systems themselves evolve.'
+            },
+            industry: {
+                h2: 'Industry Experience &amp; Scaling AI',
+                intro: 'My approach to complex data problems was shaped by working inside large-scale tech operations.',
+                uber: {
+                    h3: 'Uber &mdash; Data Science',
+                    p1: `I joined Uber as a Data Scientist during a period of rapid expansion for its machine learning systems, where the fidelity of data feeding those models had become a critical bottleneck. I led the effort to build Uber\u2019s first internal data quality monitoring system for ML pipelines &mdash; an early blueprint for what would become the modern data monitoring industry &mdash; and was the lead author on the <a href="${UBER_POST_HREF}">Uber Engineering post</a> that introduced the work publicly.`,
+                    p2: 'What struck me then, and still feels unresolved, is how much of \u201Cdata quality\u201D resists formal definition: a dataset can pass every statistical check and still be subtly wrong in ways only a domain expert would catch. That gap between measurable quality and meaningful quality is, I think, one of the more interesting open questions in the field.'
+                },
+                bigeye: {
+                    h3: 'Bigeye &mdash; Founding Data Scientist',
+                    p1: 'Recognizing that every modern enterprise needed this level of observability, I joined Bigeye as its Founding Data Scientist. From 2020 through 2023, I translated hyperscale internal monitoring tools into a flexible, enterprise-grade platform. By architecting the machine learning and automation engines at the core of the product, we abstracted away the complexity of data observability so clients could automatically detect and remediate anomalies. We deployed these capabilities to enterprise leaders like Zoom, Confluent, and Instacart, as well as to highly regulated organizations within the Intelligence Community &mdash; an experience that deeply informed my understanding of how enterprise buyers evaluate and procure critical infrastructure.',
+                    p2: 'One lesson I carried away: the hardest part of observability is rarely the detection; it\u2019s deciding which anomalies warrant human attention in a world where data is always drifting a little. That prioritization problem only grows when AI systems start reacting to the data in real time.'
+                },
+                nova: {
+                    h3: 'Nova AI &mdash; Co-Founder',
+                    p1: 'After Bigeye, I co-founded Nova AI, an agentic software testing company. Working with clients such as JB Hi-Fi, we transformed manual QA workflows into environments assisted by AI agents, substantially reducing test-writing time and freeing engineering teams to focus on the user paths that actually mattered. Building agents that act on real codebases made the reliability question concrete in a new way &mdash; it\u2019s one thing to generate a plausible test, another to trust an agent to know when it shouldn\u2019t act. I suspect the industry is still early in working out how to give these systems a well-calibrated sense of their own uncertainty.'
+                }
+            },
+            academic: {
+                h2: 'Academic Foundations &amp; Mentorship',
+                intro: 'My approach to drawing precise, replicable insights from highly interdependent systems is rooted in my academic training. I hold a PhD in Structural Biology (Biophysics) and a Master of Public Policy from Stanford, along with a BA in Statistics and Biochemistry from UC Berkeley.',
+                gratitude: 'Throughout my academic journey, I had the privilege of learning from and collaborating with some of the most accomplished scientists and economists of their generation. I mention their names here not to claim credit for their life-long work, but to express my gratitude &mdash; observing their intellect up close and learning from their uncompromising standard of rigor continues to shape how I approach problems today.',
+                ucb: {
+                    h3: 'UC Berkeley &mdash; Biophysics of DNA Replication',
+                    p1: 'At UC Berkeley, I studied the biophysical mechanisms of DNA replication under Professor John Kuriyan and Dr. Brian Kelch. Running X-ray diffraction experiments at Lawrence Berkeley National Laboratory taught me how to navigate and extract insights from intricate biological systems &mdash; and, perhaps more importantly, how much of scientific progress depends on being comfortable with partial answers while the fuller picture takes shape.'
+                },
+                stanford1: {
+                    h3: 'Stanford &mdash; Statistics &amp; Computational Biology',
+                    p1: 'At Stanford, I was drawn to the intersection of statistics and computational biology, and was advised by an extraordinary group of scientists: Professor Wing Hung Wong (recipient of the COPSS Presidents\u2019 Award in Statistics), Professor Michael Levitt (Nobel Laureate in Chemistry), Professor Chiara Sabatti, and Professor Garry Nolan. Under their guidance, I developed projects modeling cellular states through high-dimensional gene networks, with peer-reviewed publications in <em>PLOS Computational Biology</em> and the <em>Annals of Applied Statistics</em>.',
+                    p2: 'High-dimensional biology is a humbling area to work in: the models are always reductions of something far more tangled, and the question of what we\u2019re justified in concluding from them is one I still think about in my current work on AI systems.'
+                },
+                stanford2: {
+                    h3: 'Stanford &mdash; Public Policy &amp; Biosecurity',
+                    p1: 'A parallel interest in how policy is used to manage complex societal systems led me to Stanford\u2019s Master of Public Policy program, where I worked with Professor Joe Nation and Professor Bill Sharpe (Nobel Laureate in Economics). Together we applied rigorous statistical simulations to model the multi-decade behavior of public pension systems, evaluating policy shifts to optimize long-term solvency.',
+                    p2: 'This dual-track education also introduced me to biosecurity. I collaborated with Dr. Milana Trounce, Director of Biosecurity at Stanford, to co-author a publication on the academic discourse of the field. Analyzing how institutions evaluate and mitigate catastrophic biological risks fundamentally shaped my view of systemic threat models and risk governance.'
+                }
+            },
+            work: {
+                h2: 'Selected Work',
+                g1: { title: '\uD83D\uDD0D Data anomaly detection' },
+                g2: {
+                    title: '\uD83D\uDCC8 Intelligent infrastructure',
+                    sub1: 'Data anomaly detection at scale',
+                    sub2: 'Other Uber internal contributions',
+                    note1: 'Intelligent code deployment and rollback',
+                    note2: 'Cost planning and data asset usage'
+                },
+                g3: { title: '\uD83E\uDDEC Biosciences and statistical research' },
+                g4: { title: '\uD83E\uDD13 Opinion pieces on data science' }
+            },
+            contact: { h2: 'Contact Me', intro: 'Find me here:' }
+        },
+
+        fr: {
+            meta: { title: 'Henry Li' },
+            nav: { about: 'À propos', industry: 'Expérience', academic: 'Formation', selectedWork: 'Travaux', contact: 'Contact' },
+            hero: {
+                kicker: 'Statisticien · Data Scientist · Ingénieur IA',
+                lede: 'Je construis les fondations de données, les infrastructures évolutives et les systèmes de sécurité qui permettent aux entreprises de véritablement faire confiance à leurs données et à leur IA &mdash; en traduisant une théorie statistique rigoureuse et une ingénierie à grande échelle en résultats concrets pour l\u2019entreprise.'
+            },
+            about: {
+                h2: 'À propos de moi',
+                lead: 'Bonjour et bienvenue. Je suis Henry Li.',
+                p1: 'Ma carrière est consacrée à la construction des fondations de données, des infrastructures évolutives et des systèmes de sécurité qui permettent aux entreprises de véritablement faire confiance à leurs données et à leur IA.',
+                p2: 'Résoudre les goulots d\u2019étranglement actuels de l\u2019IA en entreprise exige un mélange rare de théorie statistique rigoureuse et d\u2019ingénierie à grande échelle. Au fil des années, mon travail a couvert la modélisation de systèmes biologiques imprévisibles, l\u2019architecture de moniteurs de qualité des données en entreprise, et la construction d\u2019agents IA autonomes. Aujourd\u2019hui, je me concentre sur la traduction des fondements mathématiques et techniques de ces systèmes en solutions commerciales pratiques, fiables et sécurisées &mdash; même si je serais le premier à dire que la «&nbsp;confiance&nbsp;» dans un système de données ou d\u2019IA est une cible mouvante, et qu\u2019une grande partie de ce qui rend ce travail intéressant est que les objectifs se déplacent à mesure que les systèmes eux-mêmes évoluent.'
+            },
+            industry: {
+                h2: 'Expérience en entreprise &amp; mise à l\u2019échelle de l\u2019IA',
+                intro: 'Mon approche des problèmes de données complexes a été façonnée par mon travail au sein d\u2019opérations technologiques à grande échelle.',
+                uber: {
+                    h3: 'Uber &mdash; Science des données',
+                    p1: `J\u2019ai rejoint Uber en tant que Data Scientist pendant une période d\u2019expansion rapide de ses systèmes d\u2019apprentissage automatique, alors que la fidélité des données alimentant ces modèles était devenue un goulot d\u2019étranglement critique. J\u2019ai mené la construction du premier système interne de surveillance de la qualité des données chez Uber pour les pipelines ML &mdash; un précurseur de ce qui deviendrait l\u2019industrie moderne de l\u2019observabilité des données &mdash; et j\u2019ai été l\u2019auteur principal de l\u2019<a href="${UBER_POST_HREF}">article d\u2019Uber Engineering</a> qui a présenté ce travail publiquement.`,
+                    p2: 'Ce qui m\u2019a frappé à l\u2019époque, et qui semble toujours non résolu, c\u2019est à quel point la «&nbsp;qualité des données&nbsp;» résiste à toute définition formelle : un jeu de données peut passer chaque contrôle statistique et demeurer subtilement erroné d\u2019une manière que seul un expert du domaine détecterait. Ce décalage entre la qualité mesurable et la qualité significative est, je crois, l\u2019une des questions ouvertes les plus intéressantes du domaine.'
+                },
+                bigeye: {
+                    h3: 'Bigeye &mdash; Data Scientist fondateur',
+                    p1: 'Reconnaissant que chaque entreprise moderne avait besoin de ce niveau d\u2019observabilité, j\u2019ai rejoint Bigeye en tant que Data Scientist fondateur. De 2020 à 2023, j\u2019ai traduit des outils de surveillance internes hyperscale en une plateforme flexible et adaptée aux entreprises. En architecturant les moteurs d\u2019apprentissage automatique et d\u2019automatisation au cœur du produit, nous avons masqué la complexité de l\u2019observabilité des données afin que les clients puissent détecter et corriger automatiquement les anomalies. Nous avons déployé ces capacités auprès de leaders comme Zoom, Confluent et Instacart, ainsi qu\u2019auprès d\u2019organisations hautement réglementées au sein de la Communauté du renseignement &mdash; une expérience qui a profondément éclairé ma compréhension de la manière dont les acheteurs en entreprise évaluent et acquièrent des infrastructures critiques.',
+                    p2: 'Une leçon que j\u2019en ai retenue : le plus difficile dans l\u2019observabilité n\u2019est que rarement la détection ; c\u2019est de décider quelles anomalies méritent l\u2019attention humaine dans un monde où les données dérivent toujours un peu. Ce problème de priorisation ne fait que s\u2019amplifier lorsque les systèmes d\u2019IA commencent à réagir aux données en temps réel.'
+                },
+                nova: {
+                    h3: 'Nova AI &mdash; Cofondateur',
+                    p1: 'Après Bigeye, j\u2019ai cofondé Nova AI, une société de tests logiciels agentiques. En travaillant avec des clients comme JB Hi-Fi, nous avons transformé des flux de QA manuels en environnements assistés par des agents IA, réduisant considérablement le temps d\u2019écriture des tests et permettant aux équipes d\u2019ingénierie de se concentrer sur les parcours utilisateurs qui comptaient vraiment. Construire des agents qui agissent sur de véritables bases de code a rendu la question de la fiabilité concrète d\u2019une manière nouvelle &mdash; générer un test plausible est une chose, faire confiance à un agent pour savoir quand il ne doit pas agir en est une autre. Je soupçonne que l\u2019industrie en est encore aux prémices pour doter ces systèmes d\u2019un sens bien calibré de leur propre incertitude.'
+                }
+            },
+            academic: {
+                h2: 'Fondations académiques &amp; mentorat',
+                intro: 'Mon approche pour tirer des conclusions précises et reproductibles à partir de systèmes fortement interdépendants prend racine dans ma formation universitaire. Je suis titulaire d\u2019un doctorat en biologie structurale (biophysique) et d\u2019un Master of Public Policy de Stanford, ainsi que d\u2019une licence en statistiques et biochimie de l\u2019UC Berkeley.',
+                gratitude: 'Tout au long de mon parcours universitaire, j\u2019ai eu le privilège d\u2019apprendre et de collaborer avec certains des scientifiques et économistes les plus accomplis de leur génération. Je mentionne leurs noms ici non pour m\u2019attribuer le mérite de leur travail d\u2019une vie, mais pour exprimer ma gratitude &mdash; observer leur intellect de près et apprendre de leur exigence de rigueur sans compromis continue de façonner ma manière d\u2019aborder les problèmes aujourd\u2019hui.',
+                ucb: {
+                    h3: 'UC Berkeley &mdash; Biophysique de la réplication de l\u2019ADN',
+                    p1: 'À UC Berkeley, j\u2019ai étudié les mécanismes biophysiques de la réplication de l\u2019ADN sous la direction du Professeur John Kuriyan et du Dr Brian Kelch. Mener des expériences de diffraction des rayons X au Lawrence Berkeley National Laboratory m\u2019a appris à naviguer dans des systèmes biologiques complexes et à en extraire des informations &mdash; et, peut-être plus important encore, à quel point le progrès scientifique dépend de la capacité à accepter les réponses partielles pendant que l\u2019image plus complète se dessine.'
+                },
+                stanford1: {
+                    h3: 'Stanford &mdash; Statistiques &amp; biologie computationnelle',
+                    p1: 'À Stanford, j\u2019ai été attiré par l\u2019intersection entre les statistiques et la biologie computationnelle, et j\u2019ai été conseillé par un groupe extraordinaire de scientifiques : le Professeur Wing Hung Wong (lauréat du COPSS Presidents\u2019 Award en statistiques), le Professeur Michael Levitt (prix Nobel de chimie), la Professeure Chiara Sabatti et le Professeur Garry Nolan. Sous leur direction, j\u2019ai développé des projets modélisant les états cellulaires à travers des réseaux de gènes à haute dimension, avec des publications évaluées par les pairs dans <em>PLOS Computational Biology</em> et les <em>Annals of Applied Statistics</em>.',
+                    p2: 'La biologie à haute dimension est un domaine humble dans lequel travailler : les modèles sont toujours des réductions d\u2019une réalité bien plus complexe, et la question de ce que nous sommes en droit d\u2019en conclure reste celle à laquelle je pense encore dans mon travail actuel sur les systèmes d\u2019IA.'
+                },
+                stanford2: {
+                    h3: 'Stanford &mdash; Politiques publiques &amp; biosécurité',
+                    p1: 'Un intérêt parallèle pour la manière dont les politiques publiques servent à gérer des systèmes sociétaux complexes m\u2019a conduit au programme Master of Public Policy de Stanford, où j\u2019ai travaillé avec le Professeur Joe Nation et le Professeur Bill Sharpe (prix Nobel d\u2019économie). Ensemble, nous avons appliqué des simulations statistiques rigoureuses pour modéliser le comportement sur plusieurs décennies des systèmes publics de retraite, en évaluant des changements de politique pour optimiser la solvabilité à long terme.',
+                    p2: 'Cette formation à double voie m\u2019a également introduit à la biosécurité. J\u2019ai collaboré avec la Dre Milana Trounce, Directrice de la biosécurité à Stanford, pour co-rédiger une publication sur le discours académique de ce domaine. Analyser la manière dont les institutions évaluent et atténuent les risques biologiques catastrophiques a fondamentalement façonné ma vision des modèles de menace systémique et de la gouvernance des risques.'
+                }
+            },
+            work: {
+                h2: 'Travaux sélectionnés',
+                g1: { title: '\uD83D\uDD0D Détection d\u2019anomalies de données' },
+                g2: {
+                    title: '\uD83D\uDCC8 Infrastructure intelligente',
+                    sub1: 'Détection d\u2019anomalies de données à grande échelle',
+                    sub2: 'Autres contributions internes chez Uber',
+                    note1: 'Déploiement et retour arrière intelligents du code',
+                    note2: 'Planification des coûts et utilisation des actifs de données'
+                },
+                g3: { title: '\uD83E\uDDEC Biosciences et recherche statistique' },
+                g4: { title: '\uD83E\uDD13 Tribunes sur la science des données' }
+            },
+            contact: { h2: 'Me contacter', intro: 'Retrouvez-moi ici :' }
+        },
+
+        zh: {
+            meta: { title: 'Henry Li' },
+            nav: { about: '关于', industry: '行业', academic: '学术', selectedWork: '作品', contact: '联系' },
+            hero: {
+                kicker: '统计学家 · 数据科学家 · AI 工程师',
+                lede: '我致力于构建数据基础、可扩展基础设施和安全系统，让企业真正信任其数据与 AI &mdash; 将严谨的统计理论与大规模工程实践转化为切实的业务成果。'
+            },
+            about: {
+                h2: '关于我',
+                lead: '您好，欢迎。我是 Henry Li。',
+                p1: '我的职业生涯致力于构建数据基础、可扩展的基础设施和安全系统，让企业能够真正信任其数据与 AI。',
+                p2: '解决当今企业 AI 的瓶颈，需要将严谨的统计理论与大规模工程能力罕见地结合在一起。多年来，我的工作涵盖了对难以预测的生物系统进行建模、设计企业级数据质量监控系统，以及构建自主 AI 代理。如今，我专注于将这些系统背后的数学与技术基础转化为实用、可靠且安全的商业解决方案 &mdash; 尽管我会第一个承认：数据或 AI 系统中的"信任"是一个不断移动的目标，而让这份工作有趣的很大一部分，正是系统本身在演变，目标线也在不断偏移。'
+            },
+            industry: {
+                h2: '行业经验 &amp; 扩展 AI',
+                intro: '我处理复杂数据问题的方法，是在大规模科技运营中磨炼出来的。',
+                uber: {
+                    h3: 'Uber &mdash; 数据科学',
+                    p1: `我在 Uber 机器学习系统快速扩张的阶段加入公司担任数据科学家，当时这些模型所依赖的数据保真度已成为关键瓶颈。我主导了 Uber 首个面向 ML 流水线的内部数据质量监控系统的构建 &mdash; 这是现代数据监控行业的早期蓝本 &mdash; 并以第一作者身份撰写了公开介绍该工作的 <a href="${UBER_POST_HREF}">Uber 工程博客文章</a>。`,
+                    p2: '当时令我印象深刻、至今仍未解决的，是"数据质量"这一概念在多大程度上抗拒被正式定义：一个数据集可能通过了所有统计检验，却仍以只有领域专家才能察觉的方式存在微妙错误。在我看来，可衡量的质量与真正有意义的质量之间的差距，是这一领域最有趣的开放问题之一。'
+                },
+                bigeye: {
+                    h3: 'Bigeye &mdash; 创始数据科学家',
+                    p1: '认识到每一家现代企业都需要这种级别的可观测性，我作为创始数据科学家加入了 Bigeye。从 2020 年到 2023 年，我将超大规模的内部监控工具转化为一个灵活、面向企业的平台。通过设计产品核心的机器学习与自动化引擎，我们让客户能够自动检测并修复异常，从而屏蔽了数据可观测性的复杂性。我们将这些能力部署给 Zoom、Confluent 和 Instacart 等企业领导者，也服务于情报界等受严格监管的机构 &mdash; 这段经历深刻塑造了我对企业买家如何评估与采购关键基础设施的理解。',
+                    p2: '我从中带走的一个教训是：可观测性中最困难的部分很少是检测本身，而是在数据总在轻微漂移的世界里，判断哪些异常值得人类关注。当 AI 系统开始实时响应数据时，这个优先级问题只会变得更复杂。'
+                },
+                nova: {
+                    h3: 'Nova AI &mdash; 联合创始人',
+                    p1: '离开 Bigeye 之后，我联合创立了 Nova AI，一家代理式软件测试公司。与 JB Hi-Fi 等客户合作，我们将人工 QA 工作流转变为由 AI 代理辅助的环境，大幅减少了测试编写时间，让工程团队能够专注于真正重要的用户路径。让代理在真实代码库上采取行动，让可靠性问题以全新的方式变得具体起来 &mdash; 生成一个看似合理的测试是一回事，信任一个代理知道何时不应行动则是另一回事。我认为整个行业在如何让这些系统对自身不确定性形成良好校准的判断力方面，仍处于早期阶段。'
+                }
+            },
+            academic: {
+                h2: '学术积淀 &amp; 师承',
+                intro: '我从高度相互依赖的系统中提炼精确、可重复洞见的方法，植根于我的学术训练。我拥有斯坦福大学结构生物学（生物物理方向）博士学位与公共政策硕士学位，以及加州大学伯克利分校统计学与生物化学学士学位。',
+                gratitude: '在整个学术生涯中，我有幸向他们那一代最杰出的科学家与经济学家学习并与之合作。我在此提及他们的名字，并非为他们毕生的工作贪功，而是为了表达感激 &mdash; 近距离观察他们的智识、学习他们毫不妥协的严谨标准，至今仍在塑造我思考问题的方式。',
+                ucb: {
+                    h3: 'UC 伯克利 &mdash; DNA 复制的生物物理学',
+                    p1: '在伯克利，我跟随 John Kuriyan 教授和 Brian Kelch 博士研究 DNA 复制的生物物理机制。在劳伦斯伯克利国家实验室开展 X 射线衍射实验，教会了我如何在复杂的生物系统中寻找方向并从中提取洞见 &mdash; 也许更重要的是，它让我明白：科学进步在很大程度上依赖于能够在更完整的图景逐步浮现时安然接受部分性的答案。'
+                },
+                stanford1: {
+                    h3: '斯坦福 &mdash; 统计学 &amp; 计算生物学',
+                    p1: '在斯坦福，我被统计学与计算生物学的交叉领域所吸引，并有幸得到一群非凡学者的指导：Wing Hung Wong 教授（统计学领域 COPSS 主席奖得主）、Michael Levitt 教授（诺贝尔化学奖得主）、Chiara Sabatti 教授和 Garry Nolan 教授。在他们的指导下，我开展了通过高维基因网络对细胞状态进行建模的项目，相关同行评议论文发表于 <em>PLOS Computational Biology</em> 和 <em>Annals of Applied Statistics</em>。',
+                    p2: '高维生物学是一个令人谦卑的研究领域：模型始终是某种远更复杂事物的简化，而我们能从中得出怎样的结论这一问题，是我在当前 AI 系统工作中仍在反复思索的。'
+                },
+                stanford2: {
+                    h3: '斯坦福 &mdash; 公共政策 &amp; 生物安全',
+                    p1: '对政策如何用于管理复杂社会系统的平行兴趣，将我引向了斯坦福的公共政策硕士项目，我在那里与 Joe Nation 教授和 Bill Sharpe 教授（诺贝尔经济学奖得主）共事。我们一道运用严格的统计模拟，对公共养老金系统数十年的行为进行建模，评估不同政策调整以优化长期偿付能力。',
+                    p2: '这条双轨教育也将我引入了生物安全领域。我与斯坦福生物安全主任 Milana Trounce 博士合作，共同撰写了一篇关于该领域学术话语的论文。分析机构如何评估并应对灾难性生物风险，从根本上塑造了我对系统性威胁模型与风险治理的看法。'
+                }
+            },
+            work: {
+                h2: '代表作品',
+                g1: { title: '\uD83D\uDD0D 数据异常检测' },
+                g2: {
+                    title: '\uD83D\uDCC8 智能基础设施',
+                    sub1: '大规模数据异常检测',
+                    sub2: '其他 Uber 内部贡献',
+                    note1: '智能代码部署与回滚',
+                    note2: '成本规划与数据资产使用'
+                },
+                g3: { title: '\uD83E\uDDEC 生命科学与统计研究' },
+                g4: { title: '\uD83E\uDD13 数据科学观点文章' }
+            },
+            contact: { h2: '联系我', intro: '您可以通过以下方式联系我：' }
+        },
+
+        fi: {
+            meta: { title: 'Henry Li' },
+            nav: { about: 'Tietoa', industry: 'Ura', academic: 'Koulutus', selectedWork: 'Työt', contact: 'Yhteys' },
+            hero: {
+                kicker: 'Tilastotieteilijä · Datatieteilijä · Tekoälyinsinööri',
+                lede: 'Rakennan dataperustoja, skaalautuvia infrastruktuureja ja turvallisuusjärjestelmiä, joiden avulla yritykset voivat aidosti luottaa dataansa ja tekoälyynsä &mdash; muunnan tiukan tilastoteorian ja laajamittaisen insinöörityön käytännön liiketoimintatuloksiksi.'
+            },
+            about: {
+                h2: 'Tietoa minusta',
+                lead: 'Hei ja tervetuloa. Olen Henry Li.',
+                p1: 'Urani on omistettu niiden dataperustojen, skaalautuvien infrastruktuurien ja turvallisuusjärjestelmien rakentamiselle, joiden avulla yritykset voivat aidosti luottaa dataansa ja tekoälyynsä.',
+                p2: 'Nykyisten yritystekoälyn pullonkaulojen ratkaiseminen vaatii harvinaisen yhdistelmän tiukkaa tilastoteoriaa ja laajamittaista insinöörityötä. Vuosien varrella työni on ulottunut ennakoimattomien biologisten järjestelmien mallintamisesta yritysten datanlaatuvalvonnan arkkitehtuuriin ja autonomisten tekoälyagenttien rakentamiseen. Nykyään keskityn kääntämään näiden järjestelmien matemaattiset ja tekniset perustat käytännöllisiksi, luotettaviksi ja turvallisiksi liiketoimintaratkaisuiksi &mdash; vaikka sanoisin ensimmäisenä, että \u201Dluottamus\u201D data- tai tekoälyjärjestelmään on liikkuva maali, ja iso osa siitä mikä tekee työstä kiinnostavaa on, että maalitolpat siirtyvät järjestelmien itsensä kehittyessä.'
+            },
+            industry: {
+                h2: 'Työkokemus &amp; tekoälyn skaalaaminen',
+                intro: 'Lähestymistapani monimutkaisiin dataongelmiin on muotoutunut työskentelystä laajamittaisissa teknologiaorganisaatioissa.',
+                uber: {
+                    h3: 'Uber &mdash; Datatiede',
+                    p1: `Liityin Uberille datatieteilijäksi aikana, jolloin sen koneoppimisjärjestelmät laajenivat nopeasti ja malleja ruokkivan datan luotettavuudesta oli tullut kriittinen pullonkaula. Johdin Uberin ensimmäisen ML-putkiin kohdistuvan sisäisen datanlaatuvalvontajärjestelmän rakentamista &mdash; varhainen malli sille, mistä tulisi moderni datanhavainnointiteollisuus &mdash; ja olin pääkirjoittajana <a href="${UBER_POST_HREF}">Uber Engineering -blogikirjoituksessa</a>, jossa työ esiteltiin julkisesti.`,
+                    p2: 'Mikä tuolloin iski minuun ja tuntuu yhä ratkaisemattomalta, on se kuinka paljon \u201Ddatanlaatu\u201D vastustaa muodollista määritelmää: tietokokonaisuus voi läpäistä jokaisen tilastollisen tarkistuksen ja silti olla hienovaraisesti väärin tavalla, jonka vain alan asiantuntija huomaisi. Kuilu mitattavissa olevan laadun ja merkityksellisen laadun välillä on mielestäni yksi alan kiinnostavimmista avoimista kysymyksistä.'
+                },
+                bigeye: {
+                    h3: 'Bigeye &mdash; Perustajajäsenen datatieteilijä',
+                    p1: 'Tunnistettuani, että jokainen moderni yritys tarvitsi tämän tason havaittavuutta, liityin Bigeyeen sen perustajajäsenen datatieteilijänä. Vuosina 2020\u20132023 käänsin hyperskaalautuvat sisäiset valvontatyökalut joustavaksi, yritystason alustaksi. Arkkitehtoimalla tuotteen ytimessä olevat koneoppimis- ja automaatiomoottorit abstrahoimme datan havaittavuuden monimutkaisuuden, jotta asiakkaat pystyivät automaattisesti havaitsemaan ja korjaamaan poikkeamia. Otimme nämä kyvyt käyttöön sellaisten johtavien yritysten kuin Zoomin, Confluentin ja Instacartin kanssa, sekä tiedusteluyhteisön tiukasti säänneltyjen organisaatioiden parissa &mdash; kokemus, joka syvensi merkittävästi ymmärrystäni siitä, miten yritysostajat arvioivat ja hankkivat kriittistä infrastruktuuria.',
+                    p2: 'Yksi opetus, jonka vein mukanani: havaittavuuden vaikein osa on harvoin itse havaitseminen &mdash; se on sen päättäminen, mitkä poikkeamat ansaitsevat ihmisen huomion maailmassa, jossa data ajautuu aina hieman. Tämä priorisointiongelma vain kasvaa, kun tekoälyjärjestelmät alkavat reagoida dataan reaaliajassa.'
+                },
+                nova: {
+                    h3: 'Nova AI &mdash; Osaperustaja',
+                    p1: 'Bigeyen jälkeen perustin Nova AI:n, agenttipohjaisen ohjelmistotestausyhtiön. Työskennellen asiakkaiden kuten JB Hi-Fin kanssa muutimme manuaaliset QA-työnkulut tekoälyagenttien tukemiksi ympäristöiksi, mikä vähensi merkittävästi testien kirjoittamisaikaa ja vapautti insinööritiimit keskittymään käyttäjäpolkuihin, joilla todella oli merkitystä. Agenttien rakentaminen, jotka toimivat todellisissa koodikannoissa, teki luotettavuuskysymyksestä konkreettisen uudella tavalla &mdash; on eri asia tuottaa uskottava testi kuin luottaa siihen, että agentti tietää, milloin sen ei pitäisi toimia. Epäilen, että ala on vielä varhaisessa vaiheessa sen suhteen, miten näille järjestelmille annetaan hyvin kalibroitu käsitys omasta epävarmuudestaan.'
+                }
+            },
+            academic: {
+                h2: 'Akateemiset perustat &amp; mentorointi',
+                intro: 'Lähestymistapani tarkkojen ja toistettavien oivallusten johtamiseen voimakkaasti toisistaan riippuvista järjestelmistä pohjautuu akateemiseen koulutukseeni. Minulla on tohtorintutkinto rakennebiologiasta (biofysiikka) ja Master of Public Policy -tutkinto Stanfordista sekä BA-tutkinto tilastotieteestä ja biokemiasta UC Berkeleystä.',
+                gratitude: 'Akateemisen matkani aikana minulla on ollut etuoikeus oppia ja tehdä yhteistyötä joidenkin sukupolvensa saavutetuimpien tieteilijöiden ja taloustieteilijöiden kanssa. Mainitsen heidän nimensä tässä en kunniaa hakien heidän elämäntyöstään vaan ilmaistakseni kiitollisuuteni &mdash; heidän älynsä seuraaminen läheltä ja heidän tinkimättömästä tiukkuudestaan oppiminen muovaa yhä tapaani lähestyä ongelmia.',
+                ucb: {
+                    h3: 'UC Berkeley &mdash; DNA-replikaation biofysiikka',
+                    p1: 'UC Berkeleyssä tutkin DNA-replikaation biofysikaalisia mekanismeja professori John Kuriyanin ja tohtori Brian Kelchin ohjauksessa. Röntgendiffraktiokokeiden tekeminen Lawrence Berkeley National Laboratoryssa opetti minulle, kuinka navigoida monimutkaisissa biologisissa järjestelmissä ja poimia niistä oivalluksia &mdash; ja ehkä vielä tärkeämpänä, kuinka paljon tieteellinen edistys riippuu kyvystä tyytyä osittaisiin vastauksiin samalla kun täydellisempi kuva muotoutuu.'
+                },
+                stanford1: {
+                    h3: 'Stanford &mdash; Tilastotiede &amp; laskennallinen biologia',
+                    p1: 'Stanfordissa minua veti tilastotieteen ja laskennallisen biologian risteys, ja minua ohjasi poikkeuksellinen tieteilijöiden joukko: professori Wing Hung Wong (COPSS Presidents\u2019 Award -palkinnon saaja tilastotieteessä), professori Michael Levitt (Nobelin kemian palkinnon saaja), professori Chiara Sabatti ja professori Garry Nolan. Heidän ohjauksessaan kehitin projekteja, joissa mallinsin solutiloja korkeadimensioisten geeniverkkojen kautta, vertaisarvioiduilla julkaisuilla lehdissä <em>PLOS Computational Biology</em> ja <em>Annals of Applied Statistics</em>.',
+                    p2: 'Korkeadimensioinen biologia on nöyrryttävä ala: mallit ovat aina pelkistyksiä jostakin paljon monimutkaisemmasta, ja kysymys siitä, mitä niistä on oikeutettua päätellä, on kysymys, jota mietin yhä nykyisessä työssäni tekoälyjärjestelmien parissa.'
+                },
+                stanford2: {
+                    h3: 'Stanford &mdash; Julkispolitiikka &amp; bioturvallisuus',
+                    p1: 'Rinnakkainen kiinnostus siihen, kuinka politiikkaa käytetään monimutkaisten yhteiskunnallisten järjestelmien hallintaan, johti minut Stanfordin Master of Public Policy -ohjelmaan, jossa työskentelin professori Joe Nationin ja professori Bill Sharpen (Nobelin taloustieteen palkinnon saaja) kanssa. Sovelsimme yhdessä tiukkoja tilastollisia simulaatioita julkisten eläkejärjestelmien vuosikymmenien aikaisen käyttäytymisen mallintamiseen ja arvioimme politiikan muutoksia pitkän aikavälin maksukyvyn optimoimiseksi.',
+                    p2: 'Tämä kaksoisraiteinen koulutus esitteli minut myös bioturvallisuuteen. Tein yhteistyötä Stanfordin bioturvallisuuden johtajan tohtori Milana Trouncen kanssa kirjoittaen yhteisjulkaisun alan akateemisesta keskustelusta. Analyysi siitä, kuinka instituutiot arvioivat ja lieventävät katastrofaalisia biologisia riskejä, muokkasi perustavanlaatuisesti näkemystäni systeemisistä uhkamalleista ja riskihallinnasta.'
+                }
+            },
+            work: {
+                h2: 'Valitut työt',
+                g1: { title: '\uD83D\uDD0D Datan anomalioiden tunnistus' },
+                g2: {
+                    title: '\uD83D\uDCC8 Älykäs infrastruktuuri',
+                    sub1: 'Datan anomalioiden tunnistus laajassa mittakaavassa',
+                    sub2: 'Muita Uberin sisäisiä panoksia',
+                    note1: 'Älykäs koodin käyttöönotto ja peruutus',
+                    note2: 'Kustannussuunnittelu ja datavarojen käyttö'
+                },
+                g3: { title: '\uD83E\uDDEC Biotieteet ja tilastollinen tutkimus' },
+                g4: { title: '\uD83E\uDD13 Mielipidekirjoituksia datatieteestä' }
+            },
+            contact: { h2: 'Ota yhteyttä', intro: 'Löydät minut täältä:' }
+        }
+    };
+
+    const SUPPORTED_LANGS = ['en', 'fr', 'zh', 'fi'];
+    const LANG_STORAGE_KEY = 'site-lang';
+
+    // Dotted-path resolver: 'industry.uber.p1' → I18N[lang].industry.uber.p1
+    const resolveKey = (dict, path) => path.split('.').reduce((acc, k) => (acc && typeof acc === 'object' ? acc[k] : undefined), dict);
+
+    const applyLang = (lang) => {
+        const dict = I18N[lang] || I18N.en;
+
+        document.documentElement.lang = (lang === 'zh') ? 'zh-Hans' : lang;
+        const titleStr = resolveKey(dict, 'meta.title');
+        if (titleStr) document.title = titleStr;
+
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+            const key = el.getAttribute('data-i18n');
+            const str = resolveKey(dict, key);
+            if (typeof str === 'string') el.innerHTML = str;
+        });
+
+        document.querySelectorAll('.lang-switch button').forEach((btn) => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+            btn.setAttribute('aria-pressed', btn.dataset.lang === lang ? 'true' : 'false');
+        });
+    };
+
+    const detectInitialLang = () => {
+        try {
+            const saved = localStorage.getItem(LANG_STORAGE_KEY);
+            if (saved && SUPPORTED_LANGS.includes(saved)) return saved;
+        } catch (_) { /* localStorage may be unavailable */ }
+        const nav = (navigator.language || 'en').toLowerCase();
+        const prefix = nav.split('-')[0];
+        if (SUPPORTED_LANGS.includes(prefix)) return prefix;
+        return 'en';
+    };
+
+    document.querySelectorAll('.lang-switch button').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const lang = btn.dataset.lang;
+            if (!SUPPORTED_LANGS.includes(lang)) return;
+            try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch (_) { /* ignore */ }
+            applyLang(lang);
+        });
+    });
+
+    applyLang(detectInitialLang());
 </script>
 
 </body>
