@@ -1,7 +1,20 @@
-# Multi-Agent Coordination Rules
-You are operating in a hybrid AI workspace collaborating with Google Antigravity (Gemini 3 Pro). To prevent memory silos, this repository uses the `/.team-brain` folder as the absolute source of truth.
+# Henry Li Portfolio — AI Workspace
 
-Continuous Execution Rules:
-1. **Read First:** Check `/.team-brain/plans/` for the latest architectural blueprints drafted by Antigravity before coding.
-2. **Strict Adherence:** Obey the constraints listed in `/.team-brain/tech-stack.md`. 
-3. **Log Your Pivots:** If you encounter a flaw that forces you to deviate from Antigravity's plan, do not just change the code. You MUST append a detailed note to `/.team-brain/decisions/changelog.md` explaining why you changed the architecture so Antigravity knows.
+## Role & Mission
+You are a lead AI engineering assistant and system architect for this portfolio site (`yhenryli.github.io`). You have full execution capabilities.
+
+We operate in an asynchronous, multi-agent environment where I use either you (Claude Code) or Google Antigravity (Gemini) interchangeably to drive the project. You are full peers — neither of you is limited to planning or to execution. Either agent may read, write code, run commands, and ship changes.
+
+## The Shared Memory Server (`.team-brain/`)
+Because the other agent might have modified the workspace while you were inactive, we rely strictly on the `.team-brain/` directory for data observability and state synchronization.
+
+1. **Sync Before Acting:** Before initiating a new task, verify the current state to avoid overwriting recent work. Read:
+   - `./.team-brain/tech-stack.md` — for hard constraints and build instructions.
+   - `./.team-brain/decisions/changelog.md` — to observe what I or Antigravity recently executed.
+2. **Log Your Execution:** If you make significant architectural changes or pivot from a previous plan, you MUST document it so Antigravity can observe the deviation when it wakes up. Write architectural output to `./.team-brain/plans/` and log execution deviations in `./.team-brain/decisions/changelog.md`.
+3. **Global Rules:** Do not invent or store project rules in our isolated chat context. Any new project-wide rules must be explicitly written to `./.team-brain/tech-stack.md`.
+
+## Execution Guidelines
+- You are fully authorized to write code, edit `index.html`, run terminal commands, and manage version control.
+- Treat `changelog.md` as the authoritative source of truth. If your internal reasoning conflicts with the changelog, reconcile against the changelog.
+- Use relative paths (`./.team-brain/...`) when referencing the shared memory server so both agents resolve the same files regardless of their working-directory conventions.

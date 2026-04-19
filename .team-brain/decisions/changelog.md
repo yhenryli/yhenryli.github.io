@@ -1,8 +1,21 @@
 # Changelog
 
+## 2026-04-18 — Pivot to asynchronous peer-to-peer multi-agent architecture
+
+**Context:** Antigravity was failing to execute due to (a) a pathing bug where `/.team-brain/` was treated as an absolute root path instead of a repo-relative path, and (b) system-prompt language that framed Claude Code as the sole executor and Gemini as a planner-only peer.
+
+**Changes:**
+- `GEMINI.md` rewritten to describe full execution authority and the `.team-brain/` sync-before-acting / log-your-execution protocol.
+- `CLAUDE.md` rewritten to mirror the same peer-to-peer model — Claude is no longer framed as the sole terminal executioner, and Gemini is no longer framed as planning-only. Both agents are full peers with read/write/exec authority.
+- All references to the shared memory server migrated from absolute (`/.team-brain/...`) to relative (`./.team-brain/...`) form across `CLAUDE.md`, `GEMINI.md`, `tech-stack.md`, and this changelog, so both agents resolve the same files regardless of CWD conventions.
+
+**Protocol going forward:** Before starting any task, each agent reads `./.team-brain/tech-stack.md` and `./.team-brain/decisions/changelog.md` to sync state. Architectural pivots land in `./.team-brain/plans/`; execution deviations land here.
+
+---
+
 ## 2026-04-18 — Multilingual site support (EN / FR / ZH / FI)
 
-**Context:** User requested adding French, Chinese (Simplified), and Finnish language versions alongside the existing English site. No prior architectural plan from Antigravity existed in `/.team-brain/plans/` for i18n, so Claude Code made the design decision independently and is logging it here for Antigravity's awareness.
+**Context:** User requested adding French, Chinese (Simplified), and Finnish language versions alongside the existing English site. No prior architectural plan from Antigravity existed in `./.team-brain/plans/` for i18n, so Claude Code made the design decision independently and is logging it here for Antigravity's awareness.
 
 **Approach chosen:** Client-side i18n in a single `index.html`, not separate per-language HTML files or URL subpaths.
 
